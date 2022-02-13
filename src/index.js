@@ -14,17 +14,17 @@ const oopsMmessage = 'Oops, there is no country with that name, buy the globe';
 const foundContry = 'We found country';
 const emptyName = 'Empty field, input country name';
 
-inputFind.addEventListener('input', debounce(onInputCountryName, DEBOUNCE_DELAY));
+inputFind.addEventListener('input', debounce(onInputCountry, DEBOUNCE_DELAY));
 
-function onInputCountryName() {
+function onInputCountry() {
   clear();
-  const countryFetchName = inputFind.value;
-  if (countryFetchName.trim() === '') {
+  const countryFindName = inputFind.value;
+  if (countryFindName.trim() === '') {
     makeMessage('failure', emptyName);
     return;
   }
 
-  fetchCountries(countryFetchName)
+  fetchCountries(countryFindName)
     .then(countries => {
       if (countries.length === 1) {
         countryCardTemplate(countries);
