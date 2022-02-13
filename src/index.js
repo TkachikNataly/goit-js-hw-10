@@ -1,23 +1,24 @@
+
 import './css/styles.css';
 import { debounce } from 'debounce';
-// import { fetchCountries } from './fetchCountries';
+import { fetchCountries } from './css/fetchCountries';
 import Notiflix from 'notiflix';
 
 const DEBOUNCE_DELAY = 300;
-const findCountryField = document.getElementById('search-box');
-const countryListArea = document.querySelector('.country-list');
-const countryCardEl = document.querySelector('.country-info');
+const inputFind = document.getElementById('search-box');
+const countryList = document.querySelector('.country-list');
+const countryInfo = document.querySelector('.country-info');
 
 const manyMessage = 'Too many matches found. Please enter a more specific name.';
 const oopsMmessage = 'Oops, there is no country with that name, buy the globe';
 const foundContry = 'We found country';
 const emptyName = 'Empty field, input country name';
 
-findCountryField.addEventListener('input', debounce(onInputCountryName, DEBOUNCE_DELAY));
+inputFind.addEventListener('input', debounce(onInputCountryName, DEBOUNCE_DELAY));
 
 function onInputCountryName() {
   clear();
-  const countryFetchName = findCountryField.value;
+  const countryFetchName = inputFind.value;
   if (countryFetchName.trim() === '') {
     makeMessage('failure', emptyName);
     return;
@@ -52,7 +53,7 @@ function markupCountryList(countries) {
         </li>`;
     })
     .join('');
-  countryListArea.innerHTML = markup;
+  countryList.innerHTML = markup;
 }
 
 function countryCardTemplate(country) {
@@ -68,12 +69,12 @@ function countryCardTemplate(country) {
         </li>`;
     })
     .join('');
-  countryCardEl.innerHTML = markup;
+  countryInfo.innerHTML = markup;
 }
 
 function clear() {
-  countryListArea.innerHTML = '';
-  countryCardEl.innerHTML = '';
+  countryList.innerHTML = '';
+  countryInfo.innerHTML = '';
 }
 
 function makeMessage(type, message) {
