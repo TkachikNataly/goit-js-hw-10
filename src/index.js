@@ -1,7 +1,7 @@
 
 import './css/styles.css';
 import { debounce } from 'debounce';
-import { fetchCountries } from './css/fetchCountries';
+import { fetchCountries } from './fetchCountries';
 import Notiflix from 'notiflix';
 
 const DEBOUNCE_DELAY = 300;
@@ -10,7 +10,7 @@ const countryList = document.querySelector('.country-list');
 const countryInfo = document.querySelector('.country-info');
 
 const manyMessage = 'Too many matches found. Please enter a more specific name.';
-const oopsMmessage = 'Oops, there is no country with that name, buy the globe';
+const opsMessage = 'Oops, there is no country with that name, buy the globe';
 const foundContry = 'We found country';
 const emptyName = 'Empty field, input country name';
 
@@ -31,7 +31,7 @@ function onInputCountry() {
         makeMessage('success', foundContry);
         return;
       }
-      if (countries.length < 11) {
+      if (countries.length >= 2 && countries.length <= 10) {
         markupCountryList(countries);
         makeMessage('success', `Founded ${countries.length} countries!!!`);
         return;
@@ -39,7 +39,7 @@ function onInputCountry() {
       makeMessage('warning', manyMessage);
     })
     .catch(error => {
-      makeMessage('failure', oopsMmessage);
+      makeMessage('failure', opsMessage);
     });
 }
 
